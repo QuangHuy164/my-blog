@@ -5,6 +5,8 @@ const app = express()
 const {engine} = require('express-handlebars')
 const port = 3001
 
+const route = require('./routes')
+
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
@@ -22,23 +24,10 @@ app.engine('hbs', engine({
 app.set('view engine', 'hbs')
 app.set('views', path.join(__dirname, 'resources', 'views'))
 
+// Routes init
+route(app)
 
-app.get('/', (req, res) => {
-  res.render('home')
-})
 
-app.get('/news', (req, res) => {
-  res.render('news')
-})
-
-app.get('/search', (req, res) => {
-  console.log(req.query)
-  res.render('search')
-})
-
-app.post('/search', (req, res) => {
-  res.send('')
-})
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
