@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/server.js",
   "scripts": {
-    "setup" : "prettier --single-quote --tab-width 4 --write 'src/**/*.{js,json,scss}'",
+    "setup": "prettier --single-quote --tab-width 4 --write 'src/**/*.{js,json,scss}'",
     "start": "nodemon --inspect src/server.js",
     "watch": "sass --watch src/resources/scss/app.scss:src/public/css/app.css",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -21,7 +21,8 @@
   "homepage": "https://github.com/QuangHuy164/my-blog#readme",
   "dependencies": {
     "express": "^5.1.0",
-    "express-handlebars": "^8.0.3"
+    "express-handlebars": "^8.0.3",
+    "mongoose": "^8.20.0"
   },
   "devDependencies": {
     "husky": "^9.1.7",
