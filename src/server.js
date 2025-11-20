@@ -6,10 +6,10 @@ const { engine } = require('express-handlebars');
 const port = 3001;
 
 const route = require('./routes');
-const db = require('./config/db')
+const db = require('./config/db');
 
 // Connect to DB
-db.connect()
+db.connect();
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));

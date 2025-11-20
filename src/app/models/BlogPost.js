@@ -1,12 +1,12 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const BlogPost = new Schema({
-  name: {type: String, maxLength: 255},
-  description: {type: String},
-  image: {type: String, maxLength: 255},
-  createAt: {type: Date, default: Date.now},
-  updatedAt: {type: Date, default: Date.now}
+    name: { type: String, maxLength: 255 },
+    description: { type: String },
+    image: { type: String, maxLength: 255 },
+    createAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now },
 });
 
-module.exports = mongoose.model('BlogPost', BlogPost)
+module.exports = mongoose.model('BlogPost', BlogPost);

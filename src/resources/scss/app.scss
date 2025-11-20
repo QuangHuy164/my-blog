@@ -1,9 +1,5 @@
-@import 'variables';
+@use 'variables';
 
-h1 {
-    color: red;
-}
-
-h2 {
-    color: green;
+.card-blog-item {
+    margin-top: 18px;
 }
