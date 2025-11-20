@@ -1,8 +1,14 @@
+const BlogPost = require('../models/BlogPost')
+
 class SiteController {
 
     // [GET] /
     index(req, res) {
-        res.render('home')
+        BlogPost.find({})
+        .then(blogs => res.json(blogs))
+        .catch(err => res.status(400).json({error: 'ERROR!'}))
+        
+        // res.render('home')
     }
 
     // [GET] /search
