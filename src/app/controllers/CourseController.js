@@ -15,6 +15,10 @@ class CourseController {
     create(req, res, next) {
         res.render('courses/create')
     }
+    // [POST] /courses/store
+    store(req, res, next) {
+        
+    }
 }
 
 module.exports = new CourseController();
