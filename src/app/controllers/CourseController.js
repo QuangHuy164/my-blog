@@ -10,6 +10,11 @@ class CourseController {
             })
             .catch(next)
     }
+
+    // [GET] /courses/create
+    create(req, res, next) {
+        res.render('courses/create')
+    }
 }
 
 module.exports = new CourseController();
