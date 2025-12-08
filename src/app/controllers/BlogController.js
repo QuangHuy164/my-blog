@@ -2,21 +2,21 @@ const BlogPost = require('../models/BlogPost');
 const slug = require('mongoose-slug-generator');
 
 class CourseController {
-    // [GET] /courses/:slug
+    // [GET] /blogs/:slug
     show(req, res, next) {
         BlogPost.findOne({ slug: req.params.slug }).lean()
             .then(blogs => {
-                res.render('courses/show', {blogs})
+                res.render('blogs/show', {blogs})
             })
             .catch(next)
     }
 
-    // [GET] /courses/create
+    // [GET] /blogs/create
     create(req, res, next) {
-        res.render('courses/create')
+        res.render('blogs/create')
     }
 
-    // [POST] /courses/store
+    // [POST] /blogs/store
     store(req, res, next) {
         const formData = req.body
         formData.image = `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`
