@@ -6,7 +6,7 @@ const BlogPost = new Schema({
     description: { type: String },
     image: { type: String, },
     videoId: {type: String, require: true},
-    level: {type: String, },
+    author: {type: String, },
     slug: {type: String, slug: 'name', unique: true}
 }, {
     timestamps: true,

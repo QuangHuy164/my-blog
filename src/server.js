@@ -24,6 +24,9 @@ app.engine(
     engine({
         extname: '.hbs',
         defaultLayout: 'main',
+        helpers: {
+            sum: (a,b) => a + b
+        },
         layoutsDir: path.join(__dirname, 'resources', 'views', 'layouts'),
         partialsDir: path.join(__dirname, 'resources', 'views', 'partials'),
     }),
