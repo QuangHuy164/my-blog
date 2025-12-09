@@ -25,6 +25,20 @@ class CourseController {
             .then(() => res.redirect('/'))
             .catch(error => {})
     }
+
+    // [GET] /blogs/:id/edit
+    edit(req, res, next) {
+        BlogPost.findById(req.params.id).lean()
+            .then(blogs => res.render('blogs/edit', {blogs}))
+            .catch(next)
+    }
+
+    // [PUT] /blogs/:id
+    update(req, res, next) {
+        BlogPost.updateOne({_id: req.params.id}, req.body)
+            .then(() => res.redirect('/me/stored/blogs'))
+            .catch(next)
+    }
 }
 
 module.exports = new CourseController();

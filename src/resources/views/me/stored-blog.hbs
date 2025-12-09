@@ -6,7 +6,7 @@
         <th scope="col">#</th>
         <th scope="col">Blog name</th>
         <th scope="col">Author</th>
-        <th scope="col">Create at</th>
+        <th scope="col" colspan="2">Create at</th>
       </tr>
     </thead>
     <tbody>
@@ -16,6 +16,10 @@
         <td>{{this.name}}</td>
         <td>{{this.author}}</td>
         <td>{{this.createdAt}}</td>
+        <td>
+          <a href="/blogs/{{this._id}}/edit" class="btn btn-link">Edit</a>
+          <a href="" class="btn btn-link">Delete</a>
+        </td>
       </tr>
       {{/each}}
     </tbody>

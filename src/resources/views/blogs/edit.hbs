@@ -1,0 +1,25 @@
+<div class="mt-4">
+  <h3>Update blog</h3>
+  <form class="mt-4" method="POST" action="/blogs/{{blogs._id}}?_method=PUT">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="name" class="form-control" value="{{blogs.name}}" id="name" name="name" />
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea class="form-control" id="description" name="description">{{blogs.description}}</textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="videoId">Video ID</label>
+      <input type="videoId" class="form-control" value="{{blogs.videoId}}" id="videoId" name="videoId" />
+    </div>
+
+    <div class="form-group">
+      <label for="author">Author</label>
+      <input type="author" class="form-control" value="{{blogs.author}}" id="author" name="author" />
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+</div>

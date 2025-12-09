@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
 const app = express();
+const methodOverride = require('method-override')
 const { engine } = require('express-handlebars');
 const port = 3001;
 
@@ -13,7 +14,9 @@ db.connect();
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
+
 app.use(express.json());
+app.use(methodOverride('_method'))
 
 // HTTP logger
 app.use(morgan('combined'));
