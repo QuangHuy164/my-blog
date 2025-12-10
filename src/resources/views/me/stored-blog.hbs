@@ -45,18 +45,23 @@
   </div>
 </div>
 
+{{!-- Delete hidden form --}}
+<form name="delete-blog-form" method="POST"></form>
+
 <script>
   const deleteBlogModal = document.getElementById('delete-blog-modal');
   var blogId;
-
+  const btnDeleteBlog = document.getElementById('btn-delete-blog');
+  var deleteForm = document.forms['delete-blog-form']
   if (deleteBlogModal) {
     deleteBlogModal.addEventListener('show.bs.modal', (event) => {
       const button = event.relatedTarget;
       blogId = button.getAttribute('data-id'); 
     });
 
-    const btnDeleteBlog = document.getElementById('btn-delete-blog');
-    console.log(btnDeleteBlog)
+      btnDeleteBlog.onclick = () => {
+        deleteForm.action = '/blogs/' + blogId + '?_method=DELETE'
+      }
     };
 </script>
 
