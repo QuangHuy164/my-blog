@@ -61,6 +61,7 @@
 
       btnDeleteBlog.onclick = () => {
         deleteForm.action = '/blogs/' + blogId + '?_method=DELETE'
+        deleteForm.submit()
       }
     };
 </script>
