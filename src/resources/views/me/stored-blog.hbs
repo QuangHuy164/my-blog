@@ -53,12 +53,13 @@
   var blogId;
   const btnDeleteBlog = document.getElementById('btn-delete-blog');
   var deleteForm = document.forms['delete-blog-form']
+  // When dialog confirm clicked
   if (deleteBlogModal) {
     deleteBlogModal.addEventListener('show.bs.modal', (event) => {
       const button = event.relatedTarget;
       blogId = button.getAttribute('data-id'); 
     });
-
+  // When delete blog button clicked
       btnDeleteBlog.onclick = () => {
         deleteForm.action = '/blogs/' + blogId + '?_method=DELETE'
         deleteForm.submit()
