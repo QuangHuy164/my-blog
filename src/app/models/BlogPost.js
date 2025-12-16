@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+const slug = require('mongoose-slug-generator')
+const mongooseDelete = require('mongoose-delete')
+
 const Schema = mongoose.Schema;
 
 const BlogPost = new Schema({
@@ -6,10 +9,14 @@ const BlogPost = new Schema({
     description: { type: String },
     image: { type: String, },
     videoId: {type: String, require: true},
-    author: {type: String, },
+    author: {type: String },
     slug: {type: String, slug: 'name', unique: true}
 }, {
     timestamps: true,
 });
+
+// Add plugins
+mongoose.plugin(slug)
+BlogPost.plugin(mongooseDelete,  { overrideMethods: 'all' })
 
 module.exports = mongoose.model('BlogPost', BlogPost);
