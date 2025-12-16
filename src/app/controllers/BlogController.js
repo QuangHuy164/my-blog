@@ -22,7 +22,7 @@ class CourseController {
         const blog = new BlogPost(formData)
         blog.save()
             .then(() => res.redirect('/'))
-            .catch(error => {})
+            .catch(next => {})
 
     }
 

@@ -7,6 +7,13 @@ class SiteController {
             .then(blogs => res.render('me/stored-blog', {blogs}))
             .catch(next)
     }
+
+    // [GET] /me/trash/blogs
+    trashBlogs(req, res, next) {
+         BlogPost.findDeleted({}).lean()
+            .then(blogs => res.render('me/trash-blog', {blogs}))
+            .catch(next)
+    }
 }
 
 module.exports = new SiteController();

@@ -17,6 +17,9 @@ const BlogPost = new Schema({
 
 // Add plugins
 mongoose.plugin(slug)
-BlogPost.plugin(mongooseDelete,  { overrideMethods: 'all' })
+BlogPost.plugin(mongooseDelete,  { 
+    deletedAt : true,
+    overrideMethods: 'all' 
+})
 
 module.exports = mongoose.model('BlogPost', BlogPost);
