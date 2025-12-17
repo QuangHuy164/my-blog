@@ -42,7 +42,7 @@ class CourseController {
 
     // [DELETE] /blogs/:id
     delete(req, res, next) {
-        BlogPost.deleteOne({_id: req.params.id})
+        BlogPost.delete({_id: req.params.id})
             .then(() => res.redirect('back'))
             .catch(next)
     }
