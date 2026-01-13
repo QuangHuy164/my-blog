@@ -20,7 +20,7 @@
         <td>{{this.author}}</td>
         <td>{{this.createdAt}}</td>
         <td>
-          <a href="/blogs/{{this._id}}/edit" class="btn btn-link">Restore</a>                  
+          <a href="" class="btn btn-link btn-restore" data-id="{{this._id}}">Restore</a>                  
           <a href="" class="btn btn-link" data-bs-toggle="modal" data-id="{{this._id}}" data-bs-target="#delete-blog-modal">Delete permanent</a>
         </td>
       </tr>
@@ -62,6 +62,7 @@
   const deleteBlogModal = document.getElementById('delete-blog-modal');
   var blogId;
   const btnDeleteBlog = document.getElementById('btn-delete-blog');
+  var restoreBtn = $('.btn-restore')
   var deleteForm = document.forms['delete-blog-form']
   // When dialog confirm clicked
   if (deleteBlogModal) {
@@ -74,6 +75,10 @@
         deleteForm.action = '/blogs/' + blogId + '?_method=DELETE'
         deleteForm.submit()
       }
+      restoreBtn.click(function (e) {
+        e.preventDefault()
+        console.log($(this).data('id'))
+      })
     };
 </script>
 
