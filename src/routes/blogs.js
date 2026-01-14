@@ -7,6 +7,7 @@ router.get('/create', blogController.create)
 router.post('/store', blogController.store)
 router.get('/:id/edit', blogController.edit)
 router.put('/:id', blogController.update)
+router.patch('/:id/restore', blogController.restore)
 router.delete('/:id', blogController.delete)
 router.get('/:slug', blogController.show);
 

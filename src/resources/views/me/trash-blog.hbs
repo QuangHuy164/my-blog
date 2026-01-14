@@ -57,29 +57,36 @@
 
 {{!-- Delete hidden form --}}
 <form name="delete-blog-form" method="POST"></form>
+<form name="restore-blog-form" method="POST"></form>
 
 <script>
-  const deleteBlogModal = document.getElementById('delete-blog-modal');
-  var blogId;
-  const btnDeleteBlog = document.getElementById('btn-delete-blog');
-  var restoreBtn = $('.btn-restore')
+  let blogId;
   var deleteForm = document.forms['delete-blog-form']
+  var restoreForm = document.forms['restore-blog-form']
+
   // When dialog confirm clicked
+  const deleteBlogModal = document.getElementById('delete-blog-modal');
   if (deleteBlogModal) {
     deleteBlogModal.addEventListener('show.bs.modal', (event) => {
       const button = event.relatedTarget;
       blogId = button.getAttribute('data-id'); 
     });
   // When delete blog button clicked
+  const btnDeleteBlog = document.getElementById('btn-delete-blog');
       btnDeleteBlog.onclick = () => {
         deleteForm.action = '/blogs/' + blogId + '?_method=DELETE'
         deleteForm.submit()
       }
-      restoreBtn.click(function (e) {
-        e.preventDefault()
-        console.log($(this).data('id'))
-      })
-    };
+  // when restore btn clicked
+       document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('btn-restore')) {
+      e.preventDefault();
+      const id = e.target.dataset.id;
+      restoreForm.action = `/blogs/${id}/restore?_method=PATCH`;
+      restoreForm.submit();
+  }
+       })
+  }
 </script>
 
 
