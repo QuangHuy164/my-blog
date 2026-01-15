@@ -78,14 +78,13 @@
         deleteForm.submit()
       }
   // when restore btn clicked
-       document.addEventListener('click', (e) => {
+    document.addEventListener('click', (e) => {
     if (e.target.classList.contains('btn-restore')) {
       e.preventDefault();
-      const id = e.target.dataset.id;
-      restoreForm.action = `/blogs/${id}/restore?_method=PATCH`;
+      restoreForm.action = `/blogs/${blogId}/restore?_method=PATCH`;
       restoreForm.submit();
-  }
-       })
+    }
+  });
   }
 </script>
 
