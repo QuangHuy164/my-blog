@@ -79,12 +79,20 @@
       }
   // when restore btn clicked
     document.addEventListener('click', (e) => {
-    if (e.target.classList.contains('btn-restore')) {
-      e.preventDefault();
-      restoreForm.action = `/blogs/${blogId}/restore?_method=PATCH`;
-      restoreForm.submit();
-    }
-  });
+  const restoreBtn = e.target.closest('.btn-restore');
+  if (!restoreBtn) return;
+
+  e.preventDefault();
+  const id = restoreBtn.dataset.id;
+
+  if (!id) {
+    console.error('Restore ID missing');
+    return;
+  }
+
+  restoreForm.action = `/blogs/${id}/restore?_method=PATCH`;
+  restoreForm.submit();
+});
   }
 </script>
 
