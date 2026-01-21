@@ -5,7 +5,6 @@ const mongooseDelete = require('mongoose-delete')
 const Schema = mongoose.Schema;
 
 const BlogPost = new Schema({
-    _id: String,
     name: { type: String, require: true},
     description: { type: String },
     image: { type: String, },

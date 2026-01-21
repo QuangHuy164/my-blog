@@ -49,7 +49,7 @@ class CourseController {
 
     restore(req, res, next) {
          BlogPost.restore({_id: req.params.id})
-            .then(() => res.redirect('back'))
+            .then(() => res.redirect('/me/trash/blogs'))
             .catch(next)
     }
 }

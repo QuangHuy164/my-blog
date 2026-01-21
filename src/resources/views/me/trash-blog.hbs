@@ -20,8 +20,8 @@
         <td>{{this.author}}</td>
         <td>{{this.createdAt}}</td>
         <td>
-          <a href="" class="btn btn-link btn-restore" data-id="{{this._id}}">Restore</a>                  
-          <a href="" class="btn btn-link" data-bs-toggle="modal" data-id="{{this._id}}" data-bs-target="#delete-blog-modal">Delete permanent</a>
+          <button type="button" class="btn btn-link btn-restore" data-id="{{this._id}}">Restore</button>                  
+          <button type="button" class="btn btn-link" data-bs-toggle="modal" data-id="{{this._id}}" data-bs-target="#delete-blog-modal">Delete permanent</button>
         </td>
       </tr>
       {{else}}
