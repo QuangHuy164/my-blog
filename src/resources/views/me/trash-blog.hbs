@@ -74,7 +74,7 @@
   // When delete blog button clicked
   const btnDeleteBlog = document.getElementById('btn-delete-blog');
       btnDeleteBlog.onclick = () => {
-        deleteForm.action = '/blogs/' + blogId + '?_method=DELETE'
+        deleteForm.action = '/blogs/' + blogId + '/force?_method=DELETE'
         deleteForm.submit()
       }
   // when restore btn clicked

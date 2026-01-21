@@ -17,11 +17,10 @@ class CourseController {
 
     // [POST] /blogs/store
     store(req, res, next) {
-        const formData = req.body
-        formData.image = `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`
-        const blog = new BlogPost(formData)
+        req.body.image = `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`
+        const blog = new BlogPost(req.body)
         blog.save()
-            .then(() => res.redirect('/'))
+            .then(() => res.redirect('/me/stored/blogs'))
             .catch(next => {})
 
     }
@@ -43,6 +42,13 @@ class CourseController {
     // [DELETE] /blogs/:id
     delete(req, res, next) {
         BlogPost.delete({_id: req.params.id})
+            .then(() => res.redirect('back'))
+            .catch(next)
+    }
+
+    // [DELETE] /blogs/:id/force
+    forceDelete(req, res, next) {
+        BlogPost.deleteOne({_id: req.params.id})
             .then(() => res.redirect('back'))
             .catch(next)
     }
