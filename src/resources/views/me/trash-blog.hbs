@@ -9,7 +9,7 @@
         <th scope="col">#</th>
         <th scope="col">Blog name</th>
         <th scope="col">Author</th>
-        <th scope="col" colspan="2">Create at</th>
+        <th scope="col" colspan="2">Delete at</th>
       </tr>
     </thead>
     <tbody>
@@ -18,7 +18,7 @@
         <th scope="row">{{sum @index 1}}</th>
         <td>{{this.name}}</td>
         <td>{{this.author}}</td>
-        <td>{{this.createdAt}}</td>
+        <td>{{this.deletedAt}}</td>
         <td>
           <button type="button" class="btn btn-link btn-restore" data-id="{{this._id}}">Restore</button>                  
           <button type="button" class="btn btn-link" data-bs-toggle="modal" data-id="{{this._id}}" data-bs-target="#delete-blog-modal">Delete permanent</button>
@@ -45,7 +45,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Confirm to delete this blog?
+        Confirm to delete permanent? 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

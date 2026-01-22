@@ -3,9 +3,9 @@ const BlogPost = require('../models/BlogPost');
 class SiteController {
     // [GET] /me/stored/blogs in header.hbs 
     storedBlogs(req, res, next) {
-        BlogPost.find({}).lean()
-            .then(blogs => res.render('me/stored-blog', {blogs}))
-            .catch(next)
+        Promise.all([BlogPost.find({}).lean(), BlogPost.countDocumentsDeleted() ])
+        .then(([blogs, deletedCount]) => res.render('me/stored-blog', {blogs, deletedCount}))
+        .catch(next)
     }
 
     // [GET] /me/trash/blogs
