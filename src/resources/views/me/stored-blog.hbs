@@ -1,4 +1,4 @@
-<div class="mt-4">
+<form name="container-form" class="mt-4" method="POST" action="/blogs/handle-form-actions">
   <div>
   <h2>My Blog</h2>
   <a href="/me/trash/blogs">Deleted Recently ({{deletedCount}})</a>
@@ -6,20 +6,20 @@
 
   <div class="mt-4 d-flex align-items-center">
     <div class="form-check">
-      <input class="form-check-input me-1" type="checkbox" value="" id="firstCheckbox">
-      <label class="form-check-label" for="firstCheckbox">Select all</label>
+      <input class="form-check-input me-1" type="checkbox" value="" id="checkbox-all">
+      <label class="form-check-label" for="checkbox-all">Select all</label>
     </div>
     <select class="form-select form-select-sm checkbox-select-all-options" aria-label="Small select example" id="">
       <option selected>-- Choose actions --</option>
       <option value="delete">Delete</option>
     </select>
-    <button class="btn btn-primary btn-sm disabled">Apply</button>
+    <button class="btn btn-primary btn-sm btn-checkall-submit disabled">Apply</button>
   </div>
 
   <table class="table table-hover mt-4">
     <thead>
       <tr>
-        <th scope="col">#</th>
+        <th scope="col" colspan="2">#</th>
         <th scope="col">Blog name</th>
         <th scope="col">Author</th>
         <th scope="col" colspan="2">Create at</th>
@@ -28,6 +28,12 @@
     <tbody>
       {{#each blogs}}
       <tr>
+        <td>
+          <div class="form-check">
+            <input class="form-check-input me-1" type="checkbox" name="blogIds[]" value="{{this._id}}">
+            <label class="form-check-label" for="firstCheckbox"></label>
+    </div>
+    </td>
         <th scope="row">{{sum @index 1}}</th>
         <td>{{this.name}}</td>
         <td>{{this.author}}</td>
@@ -47,7 +53,7 @@
       {{/each}}
     </tbody>
   </table>
-</div>
+</form>
 
 <!-- Confirm delete -->
 <div class="modal fade" id="delete-blog-modal" tabindex="-1" aria-labelledby="exampleModalLabel">
@@ -76,6 +82,10 @@
   var blogId;
   const btnDeleteBlog = document.getElementById('btn-delete-blog');
   var deleteForm = document.forms['delete-blog-form']
+  const containerForm = document.forms['container-form']
+  const checkboxAll = $('#checkbox-all')
+  const blogItemCheckbox = $('input[name="blogIds[]"]')
+  const checkAllSubmitBtn = $('.btn-checkall-submit')
   // When dialog confirm clicked
   if (deleteBlogModal) {
     deleteBlogModal.addEventListener('show.bs.modal', (event) => {
@@ -87,6 +97,33 @@
         deleteForm.action = '/blogs/' + blogId + '?_method=DELETE'
         deleteForm.submit()
       }
+   // checkbox clicked
+   checkboxAll.change(function () {
+    var isCheckboxAll = $(this).prop('checked')
+    blogItemCheckbox.prop('checked', isCheckboxAll)
+   })
+  // item checkbox changed
+  blogItemCheckbox.change(function (){
+   var isCheckboxAll = blogItemCheckbox.length === $('input[name="blogIds[]"]:checked').length
+  })
+// check all submit btn clicked
+checkAllSubmitBtn.click(function (e) {
+  e.preventDefault();
+
+  var isSubmittable = !$(this).hasClass('disabled')
+  if (isSubmittable) {
+    containerForm.submit()
+  }
+})
+// re-render checkall submit btn
+  function renderCheckallSubmitBtn() {
+    var checkedCount = $('input[name="blogIds[]"]:checked').length
+    if (checkedCount > 0) {
+      checkAllSubmitBtn.removeClass('disabled');
+    } else {
+      checkAllSubmitBtn.addClass('disabled')
+    }
+  }
     };
 </script>
 

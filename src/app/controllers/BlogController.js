@@ -58,6 +58,10 @@ class CourseController {
             .then(() => res.redirect('/me/trash/blogs'))
             .catch(next)
     }
+
+    handleFormActions(req, res, next) {
+
+    }
 }
 
 module.exports = new CourseController();
