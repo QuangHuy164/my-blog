@@ -31,7 +31,7 @@
         <td>
           <div class="form-check">
             <input class="form-check-input me-1" type="checkbox" name="blogIds[]" value="{{this._id}}">
-            <label class="form-check-label" for="firstCheckbox"></label>
+            <label class="form-check-label"></label>
     </div>
     </td>
         <th scope="row">{{sum @index 1}}</th>
@@ -101,10 +101,13 @@
    checkboxAll.change(function () {
     var isCheckboxAll = $(this).prop('checked')
     blogItemCheckbox.prop('checked', isCheckboxAll)
+    renderCheckallSubmitBtn()
    })
   // item checkbox changed
   blogItemCheckbox.change(function (){
    var isCheckboxAll = blogItemCheckbox.length === $('input[name="blogIds[]"]:checked').length
+   checkboxAll.prop('checked', isCheckboxAll)
+   renderCheckallSubmitBtn()
   })
 // check all submit btn clicked
 checkAllSubmitBtn.click(function (e) {
