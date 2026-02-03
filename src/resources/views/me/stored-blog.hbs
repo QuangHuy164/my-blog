@@ -9,8 +9,8 @@
       <input class="form-check-input me-1" type="checkbox" value="" id="checkbox-all">
       <label class="form-check-label" for="checkbox-all">Select all</label>
     </div>
-    <select class="form-select form-select-sm checkbox-select-all-options" aria-label="Small select example" id="">
-      <option selected>-- Choose actions --</option>
+    <select class="form-select form-select-sm checkbox-select-all-options" aria-label="Small select example" name="action">
+      <option selected value="">-- Choose actions --</option>
       <option value="delete">Delete</option>
     </select>
     <button class="btn btn-primary btn-sm btn-checkall-submit disabled">Apply</button>
@@ -86,6 +86,7 @@
   const checkboxAll = $('#checkbox-all')
   const blogItemCheckbox = $('input[name="blogIds[]"]')
   const checkAllSubmitBtn = $('.btn-checkall-submit')
+
   // When dialog confirm clicked
   if (deleteBlogModal) {
     deleteBlogModal.addEventListener('show.bs.modal', (event) => {
@@ -97,12 +98,14 @@
         deleteForm.action = '/blogs/' + blogId + '?_method=DELETE'
         deleteForm.submit()
       }
-   // checkbox clicked
+
+   // checkboxAll clicked
    checkboxAll.change(function () {
     var isCheckboxAll = $(this).prop('checked')
     blogItemCheckbox.prop('checked', isCheckboxAll)
     renderCheckallSubmitBtn()
    })
+
   // item checkbox changed
   blogItemCheckbox.change(function (){
    var isCheckboxAll = blogItemCheckbox.length === $('input[name="blogIds[]"]:checked').length

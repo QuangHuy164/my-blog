@@ -60,7 +60,15 @@ class CourseController {
     }
 
     handleFormActions(req, res, next) {
-
+        switch(req.body.action) {
+            case 'delete':
+                BlogPost.delete({_id: { $in: req.body.blogIds }})
+            .then(() => res.redirect('back'))
+            .catch(next);
+            break;
+            default: 
+                res.json({message: 'Action is invalid'})
+        }
     }
 }
 
