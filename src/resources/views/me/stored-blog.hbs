@@ -83,9 +83,9 @@
   const btnDeleteBlog = document.getElementById('btn-delete-blog');
   var deleteForm = document.forms['delete-blog-form']
   const containerForm = document.forms['container-form']
-  const checkboxAll = $('#checkbox-all')
-  const blogItemCheckbox = $('input[name="blogIds[]"]')
-  const checkAllSubmitBtn = $('.btn-checkall-submit')
+  const checkboxAll = document.getElementById('checkbox-all')
+  const blogItemCheckboxes = document.querySelectorAll('input[name="blogIds[]"]')
+  const checkAllSubmitBtn = document.querySelector('.btn-checkall-submit')
 
   // When dialog confirm clicked
   if (deleteBlogModal) {
@@ -99,38 +99,38 @@
         deleteForm.submit()
       }
 
-   // checkboxAll clicked
-   checkboxAll.change(function () {
-    var isCheckboxAll = $(this).prop('checked')
-    blogItemCheckbox.prop('checked', isCheckboxAll)
+  // select all checkbox
+  checkboxAll.addEventListener('change', () => {
+    const isChecked = checkboxAll.checked
+    blogItemCheckboxes.forEach(cb => cb.checked = isChecked)
     renderCheckallSubmitBtn()
-   })
-
-  // item checkbox changed
-  blogItemCheckbox.change(function (){
-   var isCheckboxAll = blogItemCheckbox.length === $('input[name="blogIds[]"]:checked').length
-   checkboxAll.prop('checked', isCheckboxAll)
-   renderCheckallSubmitBtn()
   })
-// check all submit btn clicked
-checkAllSubmitBtn.click(function (e) {
-  e.preventDefault();
 
-  var isSubmittable = !$(this).hasClass('disabled')
-  if (isSubmittable) {
-    containerForm.submit()
-  }
-})
+  blogItemCheckboxes.forEach(cb => {
+    cb.addEventListener('change', () => {
+      const checkedCount =
+        document.querySelectorAll('input[name="blogIds[]"]:checked').length
+
+      checkboxAll.checked = checkedCount === blogItemCheckboxes.length
+      renderCheckallSubmitBtn()
+    })
+  })
+
+// check all submit btn clicked
+checkAllSubmitBtn.addEventListener('click', e => {
+    e.preventDefault()
+    if (!checkAllSubmitBtn.classList.contains('disabled')) {
+      containerForm.submit()
+    }
+  })
 // re-render checkall submit btn
   function renderCheckallSubmitBtn() {
-    var checkedCount = $('input[name="blogIds[]"]:checked').length
-    if (checkedCount > 0) {
-      checkAllSubmitBtn.removeClass('disabled');
-    } else {
-      checkAllSubmitBtn.addClass('disabled')
+    const checkedCount =
+      document.querySelectorAll('input[name="blogIds[]"]:checked').length
+
+    checkAllSubmitBtn.classList.toggle('disabled', checkedCount === 0)
     }
   }
-    };
 </script>
 
 
