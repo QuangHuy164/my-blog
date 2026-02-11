@@ -22,15 +22,17 @@
         <th scope="col" colspan="2">#</th>
         <th scope="col">
           Blog names
-          <a href="?_sort&column=name&type=desc">
-            <i class="cil-chevron-bottom"></i>
-          </a>
-          <a href="">
-            <i class="cil-chevron-top"></i>
+          {{{sortable 'name' _sort}}}
           </a>
           </th>
-        <th scope="col">Author</th>
-        <th scope="col" colspan="2">Create at</th>
+        <th scope="col">
+          Author
+          {{{sortable 'author' _sort}}}
+          </th>
+        <th scope="col" colspan="2">
+          Create at
+        {{{sortable 'createdAt' _sort}}}
+        </th>
       </tr>
     </thead>
     <tbody>

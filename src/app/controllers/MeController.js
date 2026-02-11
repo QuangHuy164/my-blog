@@ -3,18 +3,23 @@ const BlogPost = require('../models/BlogPost');
 class SiteController {
     // [GET] /me/stored/blogs in header.hbs 
     storedBlogs(req, res, next) {
-        let blogQuery = BlogPost.find({}).lean()
+         let blogQuery = BlogPost.find({})
 
-        if (req.query._sort && req.query.column) {
-            const sortType = req.query.type === 'desc' ? -1 : 1
-            blogQuery = blogQuery.sort({
-                [req.query.column]: sortType
-            })    
-        }
+  if (req.query._sort !== undefined) {
+    blogQuery = blogQuery.sort({ [req.query.column]: req.query.type })
+  }
 
-        Promise.all([blogQuery, BlogPost.countDocumentsDeleted() ])
-        .then(([blogs, deletedCount]) => res.render('me/stored-blog', {blogs, deletedCount}))
-        .catch(next)
+  Promise.all([
+    blogQuery.lean().exec(),
+    BlogPost.countDocumentsDeleted()
+  ])
+    .then(([blogs, deletedCount]) =>
+      res.render('me/stored-blog', {
+        blogs,
+        deletedCount,
+      })
+    )
+    .catch(next)
     }
 
     // [GET] /me/trash/blogs
