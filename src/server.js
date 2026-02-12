@@ -31,28 +31,7 @@ app.engine(
     engine({
         extname: '.hbs',
         defaultLayout: 'main',
-        helpers: {
-            sum: (a,b) => a + b,
-            sortable: (field, sort) => {
-                const sortType = field === sort.column ? sort.type : 'default'
-                const icons = {
-                    default: 'cil-elevator',
-                    asc: 'cil-sort-ascending',
-                    desc: 'cil-sort-descending'
-                }
-                const types = {
-                    default: 'desc',
-                    asc: 'desc',
-                    desc: 'asc'
-                }
-                const icon = icons[sortType]
-                const type = types[sortType]    
-                return ` <a href="?_sort&column=${field}&type=${type}">
-            <i class="${icon}"></i>
-          </a>`
-                
-            }
-        },
+        helpers: require('./helpers/handlebars'),
         layoutsDir: path.join(__dirname, 'resources', 'views', 'layouts'),
         partialsDir: path.join(__dirname, 'resources', 'views', 'partials'),
     }),

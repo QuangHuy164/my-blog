@@ -3,14 +3,10 @@ const BlogPost = require('../models/BlogPost');
 class SiteController {
     // [GET] /me/stored/blogs in header.hbs 
     storedBlogs(req, res, next) {
-         let blogQuery = BlogPost.find({})
 
-  if (req.query._sort !== undefined) {
-    blogQuery = blogQuery.sort({ [req.query.column]: req.query.type })
-  }
 
   Promise.all([
-    blogQuery.lean().exec(),
+    BlogPost.find({}).sortable(req).lean(),
     BlogPost.countDocumentsDeleted()
   ])
     .then(([blogs, deletedCount]) =>

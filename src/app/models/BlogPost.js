@@ -4,7 +4,7 @@ const mongooseDelete = require('mongoose-delete')
 
 const Schema = mongoose.Schema;
 
-const BlogPost = new Schema({
+const BlogPostSchema = new Schema({
     name: { type: String, require: true},
     description: { type: String },
     image: { type: String, },
@@ -15,11 +15,20 @@ const BlogPost = new Schema({
     timestamps: true,
 });
 
+// custom query helpers
+BlogPostSchema.query.sortable = function (req) {
+     if (req.query._sort !== undefined) {
+    const isValidType = ['asc', 'desc'].includes(req.query.type)
+    return this.sort({ [req.query.column]: isValidType ? req.query.type : 'desc' })
+  }
+  return this;
+}
+
 // Add plugins
 mongoose.plugin(slug)
-BlogPost.plugin(mongooseDelete,  { 
+BlogPostSchema.plugin(mongooseDelete,  { 
     deletedAt : true,
     overrideMethods: 'all' 
 })
 
-module.exports = mongoose.model('BlogPost', BlogPost);
+module.exports = mongoose.model('BlogPost', BlogPostSchema);
