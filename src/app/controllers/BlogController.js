@@ -21,7 +21,7 @@ class CourseController {
         const blog = new BlogPost(req.body)
         blog.save()
             .then(() => res.redirect('/me/stored/blogs'))
-            .catch(next => {})
+            .catch(next)
 
     }
 
