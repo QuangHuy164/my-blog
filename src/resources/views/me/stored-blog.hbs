@@ -15,11 +15,15 @@
     </select>
     <button class="btn btn-primary btn-sm btn-checkall-submit disabled">Apply</button>
   </div>
-
+ 
   <table class="table table-hover mt-4">
     <thead>
       <tr>
-        <th scope="col" colspan="2">#</th>
+        <th scope="col"></th>
+        <th scope="col">
+          ID
+          {{{sortable '_id' _sort}}}
+        </th>
         <th scope="col">
           Blog names
           {{{sortable 'name' _sort}}}
@@ -44,8 +48,7 @@
             <label class="form-check-label"></label>
     </div>
     </td>
-        <th scope="row">{{sum @index 1}}</th>
-        <td>{{this.name}}</td>
+        <th scope="row">{{this._id}}</th>
         <td>{{this.author}}</td>
         <td>{{this.createdAt}}</td>
         <td>
